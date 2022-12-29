@@ -1,0 +1,30 @@
+<!-- <p>customer-details works!</p> -->
+    <table class="table table-hover">
+        <thead class="thead-light">
+         <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Due Date</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Actions</th>
+         </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cus of cusService.listCustomer">
+                <td>{{cus.firstName}}</td>
+                <td>{{cus.lastName}}</td>
+                <td>{{cus.email}}</td>
+                <td>{{cus.age}}</td>
+                <td>{{cus.gender}}</td>
+                <td>{{cus.doj | date}}</td>
+                <td>{{cus.description}}</td>
+                <td>{{cus.quantity}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
