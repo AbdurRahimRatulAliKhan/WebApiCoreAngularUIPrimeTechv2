@@ -46,7 +46,7 @@
                     <label for="quantity" class="label">Quantity</label> 
                     <select name="quantityID" class="form-control" [(ngModel)]="cusService.customerData.quantityID" #quantityID="ngModel" required>
                         <option value="0">Please Select</option>  
-                        <option [value]="qunt.id" *ngFor="let qunt of cusService.listQuantity">{{qunt.quantity}}</option>                      
+                        <option [ngValue]="qunt.id" *ngFor="let qunt of cusService.listQuantity">{{qunt.quantity}}</option>                      
                     </select>
                 </div>
 
@@ -86,10 +86,10 @@
             <div class="row">
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
-                    <button type="submit" [disabled]="quantityID.value==0" class="btn btn-success btn-block">Save</button>
+                    <button type="submit" [disabled]="quantityID.value==0" class="btn btn-secondary btn-block">Save</button>
                 </div>
                 <div class="col-md-2">
-                    <button type="reset" class="btn btn-danger btn-block">Cancel</button>
+                    <button type="reset" class="btn btn-secondary btn-block">Cancel</button>
                 </div>
             </div>
 

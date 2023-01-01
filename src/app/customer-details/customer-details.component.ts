@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../shared/customer.model';
 import { CustomerService } from '../shared/customer.service';
@@ -11,7 +12,7 @@ export class CustomerDetailsComponent implements OnInit {
 /**
  *
  */
-constructor(public cusService:CustomerService) {}
+constructor(public cusService:CustomerService, public datepipe:DatePipe) {}
   ngOnInit() {
     this.cusService.getCustomers().subscribe(data=>{
       this.cusService.listCustomer=data;
@@ -21,6 +22,10 @@ constructor(public cusService:CustomerService) {}
   populateCustomer(selectedCustomer: Customer)
   {
     console.log(selectedCustomer);
+
+    let df=this.datepipe.transform(selectedCustomer.doj,'yyyy-MM-dd');
+    selectedCustomer.doj=df;
+    console.log("After Transform: ", selectedCustomer.doj);
     this.cusService.customerData = selectedCustomer;
   }
 

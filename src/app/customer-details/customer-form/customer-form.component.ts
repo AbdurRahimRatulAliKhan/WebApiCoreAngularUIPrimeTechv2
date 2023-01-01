@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CustomerService } from 'src/app/shared/customer.service';
+import { Customer } from 'src/app/shared/customer.model';
 
 @Component({
   selector: 'app-customer-form',
@@ -19,19 +20,40 @@ export class CustomerFormComponent implements OnInit {
     });
   }
   submit(form:NgForm){
-    console.log('Event is working...');
+    this.cusService.customerData.isMarried=form.value.isMarried==true?1:0;
+    this.cusService.customerData.isActive=form.value.isActive==true?1:0;
+
+    if(this.cusService.customerData.id==0)
+    this.insertCustomer(form);
+    else
+    this.updateCustomer(form);
   }
 
-  insertCustomer(form:NgForm){
-    console.log('Event is working...');
+  insertCustomer(myform:NgForm){
+    this.cusService.saveCustomer().subscribe(d=>{
+      this.resetForm(myform);
+      this.refreshData();
+      console.log('save success');
+    });
   }
 
-  updateCustomer(form:NgForm){
-    console.log('Event is working...');
+  updateCustomer(myform:NgForm){
+    this.cusService.updateCustomer().subscribe(d=>{
+      this.resetForm(myform);
+      this.refreshData();
+      console.log('update success');
+    });
   }
 
-  resetForm(form:NgForm){
-    console.log('Event is working...');
+  resetForm(myform:NgForm){
+    myform.form.reset();
+    this.cusService.customerData=new Customer();
+  }
+
+  refreshData(){
+    this.cusService.getCustomers().subscribe(res=>{
+      this.cusService.listCustomer=res;
+    });
   }
 
 }
