@@ -14,9 +14,23 @@ export class CustomerFormComponent implements OnInit {
   constructor(public cusService:CustomerService) {}
   
   ngOnInit() {
-    
+    this.cusService.getQuantities().subscribe(data=>{
+      this.cusService.listQuantity=data;
+    });
   }
   submit(form:NgForm){
+    console.log('Event is working...');
+  }
+
+  insertCustomer(form:NgForm){
+    console.log('Event is working...');
+  }
+
+  updateCustomer(form:NgForm){
+    console.log('Event is working...');
+  }
+
+  resetForm(form:NgForm){
     console.log('Event is working...');
   }
 
