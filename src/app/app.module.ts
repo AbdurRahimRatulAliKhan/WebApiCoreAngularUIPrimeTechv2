@@ -8,6 +8,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { CustomerFormComponent } from './customer-details/customer-form/customer-form.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from "@angular/common";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { DatePipe } from "@angular/common";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

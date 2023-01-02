@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CustomerService } from 'src/app/shared/customer.service';
 import { Customer } from 'src/app/shared/customer.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-customer-form',
@@ -12,7 +13,7 @@ export class CustomerFormComponent implements OnInit {
   /**
    *
    */
-  constructor(public cusService:CustomerService) {}
+  constructor(public cusService:CustomerService, public toast:ToastrService) {}
   
   ngOnInit() {
     this.cusService.getQuantities().subscribe(data=>{
@@ -33,7 +34,8 @@ export class CustomerFormComponent implements OnInit {
     this.cusService.saveCustomer().subscribe(d=>{
       this.resetForm(myform);
       this.refreshData();
-      console.log('save success');
+      this.toast.success('Success', 'Record Saved');
+      // console.log('save success');
     });
   }
 
@@ -41,7 +43,8 @@ export class CustomerFormComponent implements OnInit {
     this.cusService.updateCustomer().subscribe(d=>{
       this.resetForm(myform);
       this.refreshData();
-      console.log('update success');
+      this.toast.warning('Success', 'Record Updated');
+      // console.log('update success');
     });
   }
 

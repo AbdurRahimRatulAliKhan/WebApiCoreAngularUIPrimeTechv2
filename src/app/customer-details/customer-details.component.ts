@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from '../shared/customer.model';
 import { CustomerService } from '../shared/customer.service';
 
@@ -12,7 +13,7 @@ export class CustomerDetailsComponent implements OnInit {
 /**
  *
  */
-constructor(public cusService:CustomerService, public datepipe:DatePipe) {}
+constructor(public cusService:CustomerService, public datepipe:DatePipe, public toast:ToastrService) {}
   ngOnInit() {
     this.cusService.getCustomers().subscribe(data=>{
       this.cusService.listCustomer=data;
@@ -33,9 +34,10 @@ constructor(public cusService:CustomerService, public datepipe:DatePipe) {}
   {
     if (confirm('Are you want to delete?')) {
       this.cusService.deleteCustomer(id).subscribe(data=>{
-        console.log('Deleted...');
+        // console.log('Deleted...');
         this.cusService.getCustomers().subscribe(data=>{
           this.cusService.listCustomer=data;
+          this.toast.error('Success', 'Record Deleted');
         });
       },
       err=>{
